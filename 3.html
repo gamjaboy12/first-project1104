@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f9f4ec" />
+  <meta name="description" content="천안시 독거노인을 위한 사랑의 줄눈 봉사활동 사업 소개 — 6장 인터랙티브 웹 프레젠테이션" />
+  <meta property="og:title" content="사랑의 줄눈 봉사활동 | 천안시" />
+  <meta property="og:description" content="작은 손길로 만드는 쾌적한 주거환경" />
+  <meta property="og:type" content="website" />
+  <title>사랑의 줄눈 봉사활동 | 웹 프레젠테이션</title>
+  <style>
+    :root { color-scheme: light; --paper:#f9f4ec; --white:#fffdf9; --ink:#263a36; --muted:#73837b; --mint:#168b80; --mint-dark:#116f66; --peach:#f1a569; --border:#e7e1d9; --header:72px; --footer:84px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-snap-type:y mandatory; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:Pretendard,"Noto Sans KR","Malgun Gothic",system-ui,-apple-system,sans-serif; overflow-x:hidden; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    button { font:inherit; cursor:pointer; }
+    button:focus-visible,a:focus-visible { outline:3px solid var(--mint); outline-offset:3px; }
+    .site-header { position:fixed; z-index:40; top:0; left:0; width:100%; min-height:var(--header); display:flex; align-items:center; gap:20px; padding:12px clamp(16px,4vw,58px); border-bottom:1px solid rgba(38,58,54,.08); background:rgba(253,249,241,.9); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); }
+    .brand { display:flex; align-items:center; gap:12px; min-width:0; text-decoration:none; color:inherit; }
+    .brand-symbol { width:38px; height:38px; flex:0 0 auto; border-radius:12px; display:grid; place-items:center; background:#e1f2ed; font-size:21px; }
+    .brand-text { display:flex; flex-direction:column; gap:3px; min-width:0; }
+    .brand-text strong { font-size:14px; letter-spacing:-.045em; white-space:nowrap; }
+    .brand-text small { font-size:10px; font-weight:700; letter-spacing:.12em; color:var(--mint); }
+    .desktop-nav { margin:auto; display:flex; align-items:center; gap:4px; }
+    .nav-link { white-space:nowrap; border:0; background:transparent; color:#737a74; border-radius:100px; font-size:12px; font-weight:700; padding:10px 12px; transition:.22s ease; }
+    .nav-link:hover { background:#e9f2ea; color:var(--ink); }
+    .nav-link[aria-current="step"] { color:#fff; background:var(--mint); box-shadow:0 5px 15px #1e8b7e27; }
+    .header-actions { display:flex; align-items:center; gap:8px; margin-left:auto; }
+    .icon-btn { width:38px; height:38px; flex-shrink:0; display:grid; place-items:center; border-radius:12px; background:var(--white); color:var(--ink); border:1px solid var(--border); transition:background .2s,transform .2s,border-color .2s; }
+    .icon-btn:hover { background:#e5f4ef; border-color:#c5e7dd; transform:translateY(-1px); }
+    .icon-btn svg { width:19px;height:19px; stroke:currentColor;stroke-width:1.8; fill:none;stroke-linecap:round;stroke-linejoin:round; }
+    main { position:relative; }
+    .slide-section { position:relative; min-height:100svh; width:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:calc(var(--header) + 20px) clamp(12px,4vw,54px) calc(var(--footer) + 12px); scroll-snap-align:start; scroll-snap-stop:always; overflow:hidden; isolation:isolate; }
+    .slide-section::before { content:"";position:absolute;width:min(75vw,850px);height:min(75vw,850px);border-radius:50%; background:radial-gradient(circle,#e8ebe0b3,transparent 70%);right:-30vw;top:0;z-index:-1;pointer-events:none; }
+    .slide-section:nth-child(even) { background:#f5f3ed; }
+    .slide-section:nth-child(even)::before { right:auto;left:-32vw;background:radial-gradient(circle,#f5e8d8aa,transparent 70%); }
+    .frame { width:min(100%,calc((100svh - var(--header) - var(--footer) - 46px)*16/9),1500px); position:relative; aspect-ratio:16 / 9; border:1px solid #eadfd0; border-radius:clamp(8px,1.3vw,18px); background:#fff8ee; box-shadow:0 18px 60px #3c493028,0 2px 10px #5445320c; overflow:hidden; transform:translateY(26px) scale(.976); opacity:.58; transition:transform .85s cubic-bezier(.2,.8,.2,1), opacity .75s ease,box-shadow .3s; }
+    .slide-section.in-view .frame { opacity:1;transform:translateY(0) scale(1); }
+    .frame:hover { box-shadow:0 22px 65px #3c49302f,0 2px 10px #5445320c; }
+    .slide-image { display:block;width:100%;height:100%;object-fit:contain; user-select:none;-webkit-user-drag:none; }
+    .slide-topline { display:flex;align-items:center;justify-content:space-between;width:min(100%,calc((100svh - var(--header) - var(--footer) - 46px)*16/9),1500px);margin-bottom:10px;gap:12px; }
+    .eyebrow { font-size:10px;font-weight:800;letter-spacing:.17em;color:var(--mint); }
+    .slide-caption { color:#69766e;font-size:12px;font-weight:650; }
+    .page-indicator { font-size:12px;font-weight:800;letter-spacing:.09em;color:#8d968d; }
+    .page-indicator b { font-size:15px;color:var(--mint); }
+    .section-bottom { display:flex;align-items:center;justify-content:space-between;width:min(100%,calc((100svh - var(--header) - var(--footer) - 46px)*16/9),1500px);gap:12px;margin-top:10px; }
+    .section-bottom p { margin:0;font-size:11px;color:#7c867d; }
+    .detail-button { border:0;background:transparent;font-size:11px;color:var(--mint-dark);font-weight:800;padding:6px; }
+    .detail-button:hover { text-decoration:underline; }
+    .footer { position:fixed;bottom:0;left:0;z-index:35;width:100%;height:var(--footer);padding:9px clamp(16px,4vw,58px) max(12px,env(safe-area-inset-bottom));display:flex;align-items:center;gap:18px;background:linear-gradient(0deg,rgba(249,244,236,.98),rgba(249,244,236,.90));border-top:1px solid rgba(38,58,54,.08);backdrop-filter:blur(16px); }
+    .progress-info { display:flex;align-items:baseline;gap:7px;white-space:nowrap;font-variant-numeric:tabular-nums; }
+    .progress-info strong { font-size:21px;color:var(--mint); }
+    .progress-info span { font-size:13px;color:#8e9a91; }
+    .progress-track { height:4px;border-radius:30px;background:#dedfd5;flex:1;max-width:300px;overflow:hidden; }
+    .progress-fill { height:100%;width:16.6667%;background:linear-gradient(90deg,var(--mint),#eab07e);transition:width .55s ease; }
+    .footer-hint { color:#8a968b;font-size:11px;margin:auto;white-space:nowrap; }
+    .footer-controls { display:flex;align-items:center;gap:9px;margin-left:auto; }
+    .arrow-btn { display:flex;gap:8px;align-items:center;justify-content:center;border:1px solid #dce7df;color:var(--ink);background:#fffdfa;border-radius:12px;padding:11px 15px;font-size:12px;font-weight:800;min-width:90px;transition:.2s; }
+    .arrow-btn.next { background:var(--mint);border-color:var(--mint);color:#fff; }
+    .arrow-btn:hover:not(:disabled) { transform:translateY(-2px); }
+    .arrow-btn:disabled { opacity:.35;cursor:default; }
+    .arrow-btn svg { width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none; }
+    .modal { position:fixed;inset:0;z-index:60;background:#12251ecf;display:none;align-items:center;justify-content:center;padding:clamp(12px,3vw,32px);backdrop-filter:blur(8px); }
+    .modal.open { display:flex;animation:appear .22s ease both; }
+    @keyframes appear { from {opacity:0}to{opacity:1} }
+    .modal-card { width:min(100%,1120px);max-height:min(90svh,900px);overflow:auto;border-radius:20px;background:var(--white);box-shadow:0 22px 100px #0004;padding:clamp(18px,3vw,30px); }
+    .modal-heading { display:flex;align-items:center;gap:12px;justify-content:space-between;margin-bottom:20px; }
+    .modal-heading h2 { font-size:clamp(18px,3vw,24px);margin:0;letter-spacing:-.04em; }
+    .thumb-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px; }
+    .thumb { border:2px solid transparent;padding:5px;border-radius:12px;background:transparent;text-align:left;transition:transform .2s,border-color .2s; }
+    .thumb:hover { transform:translateY(-3px);border-color:#8dd2c6; }
+    .thumb.selected { border-color:var(--mint); }
+    .thumb img { display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:7px;box-shadow:0 2px 10px #0001; }
+    .thumb-label { display:flex;justify-content:space-between;margin:8px 4px 2px;font-size:12px;font-weight:750;color:var(--ink); }
+    .text-panel { width:min(100%,600px); }
+    .text-panel h3 { margin:4px 0 12px;font-size:24px; }
+    .text-panel p { color:#607269;line-height:1.8;margin:0 0 18px; }
+    .text-panel ul {padding-left:20px;line-height:2;color:#304640; }
+    .text-panel small {color:#809087; }
+    .zoom-card {position:relative;width:min(100%,1600px);max-height:95svh;display:flex;align-items:center;justify-content:center; }
+    .zoom-image {max-width:100%;max-height:91svh;width:auto;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 20px 70px #0005; }
+    .close-floating { position:absolute;right:8px;top:8px;border:0;background:#fff;color:#243d33;font-size:22px;width:39px;height:39px;border-radius:50%;box-shadow:0 2px 12px #0002; }
+    .keyboard-tip {font-size:11px;color:#829185;margin-top:15px; }
+    .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+    @media(max-width:1050px) { .desktop-nav {display:none;} .footer-hint {display:none;} .site-header {--header:64px;} }
+    @media(max-width:640px) { :root { --header:64px;--footer:78px; } .site-header {padding:10px 14px;gap:5px;} .brand-symbol {width:32px;height:32px;border-radius:10px;font-size:17px;} .brand-text strong {font-size:12px;} .brand-text small {font-size:9px;} .header-actions {gap:5px;} .icon-btn {height:35px;width:35px;border-radius:10px;} .slide-section {padding:calc(var(--header) + 12px) 12px calc(var(--footer) + 15px);} .slide-topline,.section-bottom {width:100%;} .frame {width:100%;border-radius:8px;} .slide-caption {font-size:11px;} .section-bottom p {font-size:10px;} .footer {gap:10px;padding:10px 12px max(10px,env(safe-area-inset-bottom));} .progress-track {max-width:none;} .footer-controls {gap:5px;} .arrow-btn {min-width:0;padding:11px 12px;font-size:12px;} .thumb-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;} .modal-card {border-radius:14px;} }
+    @media(max-width:380px) { .brand-text small {display:none;} .brand-text strong {font-size:11px;} .progress-track {display:none;} }
+    @media(prefers-reduced-motion:reduce) { html {scroll-behavior:auto;} *,*::before,*::after { animation-duration:.01ms!important;transition-duration:.01ms!important; } .frame {opacity:1;transform:none;} }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <a class="brand" href="#slide-1" aria-label="첫 슬라이드로 이동">
+      <span class="brand-symbol" aria-hidden="true">♡</span>
+      <span class="brand-text"><strong>사랑의 줄눈 봉사활동</strong><small>CHEONAN · VOLUNTEER PROJECT</small></span>
+    </a>
+    <nav class="desktop-nav" id="topNav" aria-label="슬라이드 바로가기"></nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="overviewButton" aria-label="전체 슬라이드 보기" title="전체 슬라이드"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+      <button class="icon-btn" id="zoomButton" aria-label="현재 슬라이드 크게 보기" title="크게 보기"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg></button>
+      <button class="icon-btn" id="fullscreenButton" aria-label="전체 화면 보기" title="전체 화면"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg></button>
+    </div>
+  </header>
+  <main id="slides" aria-label="천안시 사랑의 줄눈 봉사활동 사업 소개"></main>
+  <footer class="footer">
+    <div class="progress-info" aria-live="polite"><strong id="currentPage">01</strong><span>/ 06</span></div>
+    <div class="progress-track" role="progressbar" aria-label="슬라이드 진행률" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="footer-hint">스크롤 · 방향키 · 터치로 이동할 수 있어요</span>
+    <div class="footer-controls"><button class="arrow-btn" id="prevBtn" aria-label="이전 슬라이드"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg> 이전</button><button class="arrow-btn next" id="nextBtn" aria-label="다음 슬라이드">다음 <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button></div>
+  </footer>
+  <div class="modal" id="overviewModal" role="dialog" aria-modal="true" aria-label="전체 슬라이드" aria-hidden="true"><div class="modal-card"><div class="modal-heading"><h2>전체 슬라이드</h2><button class="icon-btn modal-close" aria-label="닫기">✕</button></div><div class="thumb-grid" id="thumbGrid"></div><p class="keyboard-tip">슬라이드를 선택하면 해당 페이지로 이동합니다.</p></div></div>
+  <div class="modal" id="textModal" role="dialog" aria-modal="true" aria-label="슬라이드 내용 텍스트" aria-hidden="true"><div class="modal-card text-panel"><div class="modal-heading"><h2>슬라이드 내용</h2><button class="icon-btn modal-close" aria-label="닫기">✕</button></div><div id="textModalContent"></div></div></div>
+  <div class="modal" id="zoomModal" role="dialog" aria-modal="true" aria-label="슬라이드 확대" aria-hidden="true"><div class="zoom-card"><img id="zoomImage" class="zoom-image" src="assets/slide-1.jpg" alt="확대된 슬라이드"/><button class="close-floating modal-close" aria-label="닫기">✕</button></div></div>
+  <script>
+    'use strict';
+    // Original content is faithfully reproduced in the slide images. Text is also available in an accessible panel.
+    const data = [
+      {nav:'표지', label:'사업 소개', section:'INTRO', title:'천안시 독거노인을 위한 사랑의 줄눈 봉사활동', subtitle:'작은 손길로 만드는 쾌적한 주거환경', lines:['지역사회 주거환경 개선 · 재능기부','줄눈 보수','사업 소개(안) · 2026','※ 사업명 및 운영계획은 제안 단계 기준']},
+      {nav:'사업 소개', label:'어떤 사업인가요?', section:'01 / ABOUT', title:'어떤 사업인가요?', subtitle:'독거노인 가구의 욕실 줄눈을 정비하는 생활밀착형 재능기부', lines:['사업 대상: 천안시 관내 독거노인 가구','주요 내용: 욕실·화장실 줄눈 보수 및 정리','사업 목적: 쾌적하고 청결한 주거환경 조성','사업 성격: 취약계층 주거환경 개선형 재능기부 봉사활동']},
+      {nav:'추진 필요성', label:'왜 필요한가요?', section:'02 / WHY', title:'왜 필요한가요?', subtitle:'노후 줄눈 정비로 일상 속 주거 관리 부담을 덜어드립니다', lines:['노후 줄눈 오염: 청소만으로 관리하기 어려운 틈새','고령자 관리 부담: 반복적인 욕실 관리의 어려움','생활밀착형 지원: 집 안의 작은 불편부터 개선','정비 전 / 정비 후 비교 도식','※ 이해를 돕기 위한 도식 예시']},
+      {nav:'봉사 활동', label:'무엇을 하나요?', section:'03 / ACTIVITIES', title:'무엇을 하나요?', subtitle:'현장 확인부터 마무리 정리까지, 필요한 부분을 꼼꼼히 살핍니다', lines:['01 상태 점검 — 욕실·화장실 확인','02 줄눈 보수 — 노후 줄눈 정비','03 청소·정리 — 작업 공간 마무리','04 안부 확인 — 어르신 생활 살피기']},
+      {nav:'추진 절차', label:'어떻게 진행하나요?', section:'04 / PROCESS', title:'어떻게 진행하나요?', subtitle:'대상 가구 선정부터 사후 점검까지 단계적으로 추진합니다', lines:['01 대상 가구 선정','02 현장 확인','03 봉사자·자재 준비','04 줄눈 시공','05 사후 점검','안전교육 · 환기 · 작업 적합성 확인 등 현장 안전수칙 준수']},
+      {nav:'기대 효과', label:'작은 봉사, 따뜻한 변화', section:'05 / IMPACT', title:'작은 봉사, 따뜻한 변화', subtitle:'생활의 공간을 돌보고, 이웃의 마음을 잇습니다', lines:['주거환경 개선: 청결한 생활공간 조성','생활 편의 향상: 일상적인 관리 부담 완화','돌봄문화 확산: 나눔과 이웃 교류 확대','“작은 손길이 모여 어르신의 일상을 바꿉니다.”']}
+    ];
+    const main=document.getElementById('slides'),topNav=document.getElementById('topNav'),thumbGrid=document.getElementById('thumbGrid');
+    let active=0,lastFocus=null;
+    function pad(n){return String(n).padStart(2,'0');}
+    function imageUrl(i){return `assets/slide-${i+1}.jpg`;}
+    data.forEach((slide,i)=>{
+      const sec=document.createElement('section');sec.id=`slide-${i+1}`;sec.className='slide-section';sec.setAttribute('aria-label',`${i+1}번 슬라이드: ${slide.title}`);
+      sec.innerHTML=`<div class="slide-topline"><span class="eyebrow">${slide.section}</span><span class="slide-caption">${slide.label}</span></div><div class="frame" title="클릭해서 크게 보기"><img class="slide-image" src="${imageUrl(i)}" alt="${slide.title} — ${slide.subtitle}" loading="${i===0?'eager':'lazy'}" ${i===0?'fetchpriority="high"':''}/></div><div class="section-bottom"><p>천안시 독거노인을 위한 사랑의 줄눈 봉사활동 · 사업 소개(안)</p><button class="detail-button" type="button" data-text="${i}">텍스트로 자세히 보기 ↗</button><span class="page-indicator"><b>${pad(i+1)}</b> / 06</span></div>`;
+      sec.querySelector('.frame').addEventListener('click',()=>openZoom(i));
+      sec.querySelector('.detail-button').addEventListener('click',()=>openText(i));
+      main.append(sec);
+      const nav=document.createElement('button');nav.type='button';nav.className='nav-link';nav.textContent=slide.nav;nav.addEventListener('click',()=>go(i));topNav.append(nav);
+      const thumb=document.createElement('button');thumb.type='button';thumb.className='thumb';thumb.innerHTML=`<img loading="lazy" src="${imageUrl(i)}" alt="${slide.nav} 미리보기"/><span class="thumb-label"><span>${pad(i+1)} · ${slide.nav}</span><span>↗</span></span>`;thumb.addEventListener('click',()=>{closeModal();go(i);});thumbGrid.append(thumb);
+    });
+    const sections=[...document.querySelectorAll('.slide-section')], navs=[...document.querySelectorAll('.nav-link')],thumbs=[...document.querySelectorAll('.thumb')];
+    const currentPage=document.getElementById('currentPage'),progressFill=document.getElementById('progressFill'),progressTrack=document.getElementById('progressTrack'),prevBtn=document.getElementById('prevBtn'),nextBtn=document.getElementById('nextBtn');
+    function setActive(i){if(i<0||i>=data.length)return;active=i;currentPage.textContent=pad(i+1);progressFill.style.width=`${(i+1)/data.length*100}%`;progressTrack.setAttribute('aria-valuenow',String(i+1));prevBtn.disabled=i===0;nextBtn.disabled=i===data.length-1;navs.forEach((n,j)=>{if(j===i)n.setAttribute('aria-current','step');else n.removeAttribute('aria-current');});thumbs.forEach((t,j)=>t.classList.toggle('selected',j===i));}
+    function go(i){if(i<0||i>=data.length)return;setActive(i);sections[i].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});history.replaceState(null,'',`#slide-${i+1}`);}
+    prevBtn.addEventListener('click',()=>go(active-1));nextBtn.addEventListener('click',()=>go(active+1));
+    const observer=new IntersectionObserver(entries=>{let best=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(best){const idx=sections.indexOf(best.target);setActive(idx);best.target.classList.add('in-view');}}, {threshold:[.2,.45,.65,.85]});sections.forEach(s=>observer.observe(s));
+    function openModal(id){lastFocus=document.activeElement;const el=document.getElementById(id);el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';el.querySelector('.modal-close')?.focus();}
+    function closeModal(){document.querySelectorAll('.modal.open').forEach(el=>{el.classList.remove('open');el.setAttribute('aria-hidden','true');});document.body.style.overflow='';lastFocus?.focus?.();}
+    function openZoom(i=active){const img=document.getElementById('zoomImage');img.src=imageUrl(i);img.alt=`${data[i].title} 확대 화면`;openModal('zoomModal');}
+    function openText(i){const d=data[i],parent=document.getElementById('textModalContent');parent.replaceChildren();const h=document.createElement('h3');h.textContent=d.title;const p=document.createElement('p');p.textContent=d.subtitle;const ul=document.createElement('ul');d.lines.forEach(line=>{const li=document.createElement('li');li.textContent=line;ul.append(li);});const small=document.createElement('small');small.textContent=`${pad(i+1)} / 06 · 원본 발표자료에 수록된 내용`;parent.append(h,p,ul,small);openModal('textModal');}
+    document.getElementById('overviewButton').addEventListener('click',()=>openModal('overviewModal'));
+    document.getElementById('zoomButton').addEventListener('click',()=>openZoom());
+    document.getElementById('fullscreenButton').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch(e){openZoom();}});
+    document.querySelectorAll('.modal-close').forEach(b=>b.addEventListener('click',closeModal));document.querySelectorAll('.modal').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeModal();}));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();return;}if(document.querySelector('.modal.open'))return;if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(active+1);}else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(active-1);}else if(e.key==='Home'){e.preventDefault();go(0);}else if(e.key==='End'){e.preventDefault();go(data.length-1);}else if(e.key.toLowerCase()==='g'){openModal('overviewModal');}});
+    // Native page scrolling is intentionally retained so mouse wheels, trackpads, and mobile swipes work without external libraries.
+    window.addEventListener('load',()=>{const hash=location.hash.match(/^#slide-(\d+)$/),start=hash?Math.min(data.length,Math.max(1,+hash[1]))-1:0;setActive(start);if(start)sections[start].scrollIntoView({behavior:'instant'});else sections[0].classList.add('in-view');});
+  </script>
+</body>
+</html>
